@@ -1,0 +1,19 @@
+﻿@model Products
+
+<div class="col-md-4 mt-4">
+    <div class="card h-100">
+        <div class="bg-light">
+            <img class="card-img-top" src=@Model.ImageThumbnailUrl alt="image for Product" />
+            <div class="card-body">
+                <div class="card-title">
+                    <h3><a asp-controller="Products" asp-action="ItemPage" asp-route-id="@Model.Product_Id"> @Model.Name</a></h3>
+                </div>
+                <p class="card-text">
+                    <h3>@Model.Catergory.CategoryName</h3>
+                    @Model.Description
+                </p>
+                <h3 class="text-right">@Model.Price.ToString("c2") </h3>
+            </div>
+        </div>
+    </div>
+</div>

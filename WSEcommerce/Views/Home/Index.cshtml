@@ -1,0 +1,19 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row">
+    <div class=" col-10">
+        <partial name="_Carousel" />
+    </div>
+</div>
+<h2>Products On Sale</h2>
+
+<div class="row">
+    @foreach (var product in Model.productsOnSale)
+    {
+        <partial name="_ProductCard" model="product"/>
+    }
+</div>

@@ -1,0 +1,20 @@
+﻿@model ProductsIndexViewModel
+
+@{
+    ViewData["Title"] = "Previous Work";
+}
+<div class="card-deck">
+    @foreach (var product in Model.Products)
+    {
+        <div class="col-md-4 mt-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <img src=@product.ImageThumbnailUrl alt="image for Product" />
+                </div>
+                <div class="card-title">
+                    <h3>@product.Name</h3>
+                </div>   
+            </div>
+        </div>
+    }
+</div>

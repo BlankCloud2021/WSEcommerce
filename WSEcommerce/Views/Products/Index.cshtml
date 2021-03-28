@@ -1,0 +1,19 @@
+﻿@model ProductsIndexViewModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title> Product View </title>
+</head>
+<body>
+    <h1> @Model.CurrentCategory</h1>
+    <div class="card-deck">
+        @foreach (var product in Model.Products)
+        {
+           <partial name="_ProductCard" model="product"/>
+        }
+    </div>
+</body>
+</html>
