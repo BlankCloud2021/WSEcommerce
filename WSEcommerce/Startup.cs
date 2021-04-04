@@ -30,10 +30,13 @@ namespace WSEcommerce
             services.AddControllersWithViews();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
-
+            services.AddScoped<IStoreRepository, EFStoreRepository>();
 
             services.AddDbContext<WSEcommerceDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("WSEcommerceDbContext")));
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +45,10 @@ namespace WSEcommerce
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+                app.UseStaticFiles();
+                app.UseSession();
+                app.UseRouting();
             }
             else
             {
@@ -58,6 +65,21 @@ namespace WSEcommerce
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("catpage",
+                   "{category}/Page{productPage:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("page", "Page{productPage:int}",
+                     new { Controller = "Home", action = "Index", productPage = 1 });
+
+                endpoints.MapControllerRoute("category", "{category}",
+                    new { Controller = "Home", action = "Index", productPage = 1 });
+
+                endpoints.MapControllerRoute("pagination",
+                     "Products/Page{productPage}",
+                      new { Controller = "Home", action = "Index", productPage = 1 });
+
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

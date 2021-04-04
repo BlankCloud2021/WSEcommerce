@@ -20,6 +20,7 @@ namespace WSEcommerce.Data
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Customers> Customers { get; set; }
         public DbSet<ProjectRequest> ProjectRequests { get; set; }
+        
 
     }
 

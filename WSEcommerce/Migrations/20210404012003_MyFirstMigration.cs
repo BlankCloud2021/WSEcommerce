@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WSEcommerce.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,6 +52,22 @@ namespace WSEcommerce.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderDetails", x => x.OrderDetails_Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectRequests",
+                columns: table => new
+                {
+                    ProjectRequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageURl = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectRequests", x => x.ProjectRequestId);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,6 +154,9 @@ namespace WSEcommerce.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "ProjectRequests");
 
             migrationBuilder.DropTable(
                 name: "Customers");

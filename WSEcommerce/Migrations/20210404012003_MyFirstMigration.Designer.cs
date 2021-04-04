@@ -10,8 +10,8 @@ using WSEcommerce.Data;
 namespace WSEcommerce.Migrations
 {
     [DbContext(typeof(WSEcommerceDbContext))]
-    [Migration("20210320194706_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210404012003_MyFirstMigration")]
+    partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,6 +176,30 @@ namespace WSEcommerce.Migrations
                     b.HasIndex("OrderDetails_Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("WSEcommerce.Models.ProjectRequest", b =>
+                {
+                    b.Property<int>("ProjectRequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Discription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ImageURl")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProjectRequestId");
+
+                    b.ToTable("ProjectRequests");
                 });
 
             modelBuilder.Entity("WSEcommerce.Models.Orders", b =>
