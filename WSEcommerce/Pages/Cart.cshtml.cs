@@ -24,13 +24,19 @@ namespace WSEcommerce.Pages
             ReturnUrl = returnUrl ?? "/";
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
-        public IActionResult OnPost(long productId, string returnUrl)
+        public IActionResult OnPost(int productId, string returnUrl)
         {
             Products product = repository.Products
             .FirstOrDefault(p => p.Product_Id == productId);
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.AddItem(product, 1);
             HttpContext.Session.SetJson("cart", Cart);
+            return RedirectToPage(new { returnUrl = returnUrl });
+        }
+        public IActionResult OnPostRemove(long productId, string returnUrl)
+        {
+            Cart.RemoveLine(Cart.Lines.First(cl =>
+            cl.Products.Product_Id == productId).Products);
             return RedirectToPage(new { returnUrl = returnUrl });
         }
     }

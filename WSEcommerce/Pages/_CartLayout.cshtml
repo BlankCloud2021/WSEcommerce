@@ -1,16 +1,82 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>SportsStore</title>
-    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+    <link href="~/content/site.css" rel="stylesheet" />
+    <title>@ViewData["Title"] - WSEcommerce</title>
 </head>
 <body>
-    <div class="bg-dark text-white p-2">
-        <span class="navbar-brand ml-2">SPORTS STORE</span>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+
+            <div class="container">
+                <div class="row">
+                    <div class="">
+                        <div class="col-md-3">
+                            <p class=" lead">
+                                <a asp-controller="Home" asp-action="Index"><img class="img-fluid" src="~/images/Screenshot .png" /> </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><h3>Home</h3></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Browse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="PreviousWork">Previous Work</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Project Request</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="btn-outline-primary">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Login</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="text-right">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Sign up</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="col-md-9">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
-    <div class="m-1 p-1">
-        @RenderBody()
-    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - WSEcommerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

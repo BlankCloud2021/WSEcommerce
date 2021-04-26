@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using WSEcommerce.Data;
 using Microsoft.EntityFrameworkCore;
 using WSEcommerce.Models;
+using Microsoft.AspNetCore.Http;
+
 
 namespace WSEcommerce
 {
@@ -37,6 +39,8 @@ namespace WSEcommerce
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

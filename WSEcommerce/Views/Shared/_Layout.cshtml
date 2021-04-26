@@ -7,6 +7,7 @@
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
     <link href="~/content/site.css" rel="stylesheet" />
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <title>@ViewData["Title"] - WSEcommerce</title>
 </head>
 <body>
@@ -39,22 +40,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="PreviousWork">Previous Work</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Project Request</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ProjectRequests" asp-action="Create">Project Request</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <div class="btn-outline-primary">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Login</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div class="text-right">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Sign up</a>
-                            </div>
-                        </li>
                     </ul>
+                    <partial name="_LoginPartial.cshtml" />
+                    <div class="col-6 text-right">
+                        <vc:cart-summary />
+                    </div>
                 </div>
             </div>
         </nav>
