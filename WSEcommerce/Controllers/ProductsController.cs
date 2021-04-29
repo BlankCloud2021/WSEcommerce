@@ -35,6 +35,7 @@ namespace WSEcommerce.Controllers
 
             return View(Product);
         }
+
         public IActionResult PreviousWork()
         {
             var productIndexViewModel = new ProductsIndexViewModel();
