@@ -24,10 +24,10 @@ namespace WSEcommerce.Pages
             ReturnUrl = returnUrl ?? "/";
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
-        public IActionResult OnPost(int product_Id, string returnUrl)
+        public IActionResult OnPost(int productId, string returnUrl)
         {
             Products product = repository.Products
-            .FirstOrDefault(p => p.Product_Id == product_Id);
+            .FirstOrDefault(p => p.Product_Id == productId);
             Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.AddItem(product, 1);
             HttpContext.Session.SetJson("cart", Cart);

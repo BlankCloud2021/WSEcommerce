@@ -16,33 +16,8 @@ namespace WSEcommerce.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("ProductVersion", "6.0.0-preview.2.21154.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("WSEcommerce.Models.CartLine", b =>
-                {
-                    b.Property<int>("CartLineID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("OrdersOrder_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductsProduct_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartLineID");
-
-                    b.HasIndex("OrdersOrder_Id");
-
-                    b.HasIndex("ProductsProduct_Id");
-
-                    b.ToTable("CartLine");
-                });
 
             modelBuilder.Entity("WSEcommerce.Models.Categories", b =>
                 {
@@ -120,32 +95,14 @@ namespace WSEcommerce.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Customer_Id")
                         .HasColumnType("int");
 
                     b.Property<int?>("CustomersCustomer_Id")
                         .HasColumnType("int");
 
-                    b.Property<bool>("GiftWrap")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Line1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Line2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Line3")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NumberOfItemsOrdered")
+                        .HasColumnType("int");
 
                     b.Property<bool>("OrderCompleted")
                         .HasColumnType("bit");
@@ -156,11 +113,7 @@ namespace WSEcommerce.Migrations
                     b.Property<string>("OrderEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Zip")
+                    b.Property<string>("ShippingAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Order_Id");
@@ -189,6 +142,9 @@ namespace WSEcommerce.Migrations
                     b.Property<string>("ImageThumbnailUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
 
@@ -201,9 +157,6 @@ namespace WSEcommerce.Migrations
 
                     b.Property<int?>("OrderDetails_Id")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -242,25 +195,9 @@ namespace WSEcommerce.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("ProjectRequestId");
 
                     b.ToTable("ProjectRequests");
-                });
-
-            modelBuilder.Entity("WSEcommerce.Models.CartLine", b =>
-                {
-                    b.HasOne("WSEcommerce.Models.Orders", null)
-                        .WithMany("Lines")
-                        .HasForeignKey("OrdersOrder_Id");
-
-                    b.HasOne("WSEcommerce.Models.Products", "Products")
-                        .WithMany()
-                        .HasForeignKey("ProductsProduct_Id");
-
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("WSEcommerce.Models.Orders", b =>
@@ -293,11 +230,6 @@ namespace WSEcommerce.Migrations
             modelBuilder.Entity("WSEcommerce.Models.OrderDetails", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("WSEcommerce.Models.Orders", b =>
-                {
-                    b.Navigation("Lines");
                 });
 #pragma warning restore 612, 618
         }

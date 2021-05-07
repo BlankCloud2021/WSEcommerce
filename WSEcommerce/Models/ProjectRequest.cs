@@ -18,7 +18,9 @@ namespace WSEcommerce.Models
 
         [Display(Name = "Breif Discription")]
         public string Discription { get; set; }
-        public byte[] Photo { get; set; }
+
+        [Display(Name = "Images")]
+        [DataType(DataType.ImageUrl)]
         public int? ImageURl { get; set; }
     } 
 }

@@ -23,7 +23,6 @@ namespace WSEcommerce.PayPalHelper
         {
             try
             {
-
                 return Task.Run(async () =>
                 {
                     HttpClient http = GetPaypalHttpClient();
@@ -37,7 +36,7 @@ namespace WSEcommerce.PayPalHelper
                 Debug.WriteLine(ex, "Failed to login to PayPal");
                 return null;
             }
-        }
+            }
 
         public async Task<PayPalPaymentExecutedResponse> executedpayment(string paymentId,string payerId)
         {

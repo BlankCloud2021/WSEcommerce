@@ -45,8 +45,7 @@
 </table>
 <div class="text-center">
     <a class="btn btn-primary" href="@Model.ReturnUrl">Continue shopping</a>
-    <form asp-controller="Payment" asp-action="Checkout" method="post">
-        <input type="hidden" name="total" value="@Model.Cart.ComputeTotalValue()" />
-        <input type="submit" value="Checkout" />
-    </form>
+    <a class="btn btn-primary" asp-action="Checkout" asp-controller="Order">
+        Checkout
+    </a>
 </div>
