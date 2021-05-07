@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using WSEcommerce.Data;
 using Microsoft.EntityFrameworkCore;
 using WSEcommerce.Models;
+using WSEcommerce.IService;
+using WSEcommerce.Service;
 using Microsoft.AspNetCore.Http;
 
 
@@ -33,6 +35,7 @@ namespace WSEcommerce
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IStoreRepository, EFStoreRepository>();
+            services.AddScoped<IProductService, ProductService>();
 
             services.AddDbContext<WSEcommerceDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("WSEcommerceDbContext")));

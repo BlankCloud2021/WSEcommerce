@@ -21,8 +21,7 @@ namespace WSEcommerce.Models
         public int? Weight { get; set; }
         public string Description { get; set; }
 
-        [DataType(DataType.ImageUrl)]
-        public string ImageUrl { get; set; }
+        public byte[] Photo { get; set; }
 
         [DataType(DataType.ImageUrl)]
         public string ImageThumbnailUrl { get; set; }

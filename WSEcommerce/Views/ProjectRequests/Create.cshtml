@@ -24,13 +24,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Discription" class="control-label"></label>
-                <input asp-for="Discription" class="form-control" />
+                <textarea class="form-control" asp-for="Discription"></textarea>
                 <span asp-validation-for="Discription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageURl" class="control-label"></label>
-                <input asp-for="ImageURl" class="form-control" />
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" id="txtFile" type="file" />
                 <span asp-validation-for="ImageURl" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <img id="imgViewer" width="200" height="200" style="border:1px solid #000000;margin-top:10px;" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -45,4 +48,59 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+    $("#txtFile").change(function (event) {
+        var files = event.target.files;
+        $("#imgViewer").attr("src", window.URL.createObjectURL(files[0]));
+    });
+    $("#btnSave").click(function () {
+        var files = $("#txtFile").prop("files");
+        var formData = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            formData.append("file", files[i]);
+        }
+        var oProjectRequest = {
+            Name: $("#txtName").val(),
+            Roll: $("#txtRoll").val()
+        };
+        formData.append("ProjectRequest", JSON.stringify(oStudent));
+
+        $.ajax({
+            type: "POST",
+            url: "/ProjectRequest/SaveFile",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                ResetFields();
+                alert(data);
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+    $("#btnRead").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetSavedStudent",
+            success: function (data) {
+                $("#txtName").val(data.Name);
+                $("#txtRoll").val(data.Roll);
+                $('#imgViewer').attr('src', "data:image/jpg;base64," + data.Photo + "");
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+
+    function ResetFields() {
+        $("#txtName,#txtRoll").val("");
+        $("#imgViewer").attr("src", "");
+    }
+</script>
 }
