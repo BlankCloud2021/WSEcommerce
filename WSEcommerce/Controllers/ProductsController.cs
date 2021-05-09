@@ -27,7 +27,6 @@ namespace WSEcommerce.Controllers
 
             return View(productIndexViewModel);
         }
-
         public IActionResult ItemPage(int id)
         {
             var Product = _productRepository.GetProductById(id);

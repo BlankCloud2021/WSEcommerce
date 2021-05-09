@@ -1,12 +1,8 @@
 ﻿body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    padding-bottom: 20px;
-    background-image: url('file:///C:\Users\BlankSpace\OneDrive\Documents\MSSA C7\Personal Project\WSEcommerces\WSEcommerce\wwwroot\images\Orange BackGround.jpeg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-image: url('/images/pattern.png');
+    background-repeat: repeat;
     font-family: 'Source Sans Pro', sans-serif;
-    margin: auto;
 }
 
 

@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using WSEcommerce.Data;
 using WSEcommerce.Models;
-using WSEcommerce.IService;
 
 namespace WSEcommerce.Controllers
 {
     public class ProjectRequestsController : Controller
     {
         private readonly WSEcommerceDbContext _context;
-        private IProductService _productService = null;
-        public ProjectRequestsController(WSEcommerceDbContext context, IProductService service)
+
+        public ProjectRequestsController(WSEcommerceDbContext context)
         {
             _context = context;
-            _productService = service;
         }
 
         // GET: ProjectRequests
@@ -64,32 +60,9 @@ namespace WSEcommerce.Controllers
             {
                 _context.Add(projectRequest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Thankspage));
+                return RedirectToAction(nameof(Index));
             }
             return View(projectRequest);
-        }
-
-        [HttpPost]
-        public string SaveFile(FileUpload fileObj)
-        {
-            ProjectRequest oProjectRequest = JsonConvert.DeserializeObject<ProjectRequest>(fileObj.ProjectRequest);
-
-            if (fileObj.file.Length > 0)
-            {
-                using (var ms = new MemoryStream())
-                {
-                    fileObj.file.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-                    oProjectRequest.Photo = fileBytes;
-
-                    oProjectRequest = _productService.Save(oProjectRequest);
-                    if (oProjectRequest.ProjectRequestId > 0)
-                    {
-                        return "Saved";
-                    }
-                }
-            }
-            return "Failed";
         }
 
         // GET: ProjectRequests/Edit/5
@@ -175,11 +148,6 @@ namespace WSEcommerce.Controllers
         private bool ProjectRequestExists(int id)
         {
             return _context.ProjectRequests.Any(e => e.ProjectRequestId == id);
-        }
-
-        public IActionResult Thankspage()
-        {
-            return View();
         }
     }
 }
